@@ -1,0 +1,41 @@
+<%= form_with scope: :appointment, url: '/appointments',  local: true do |form| %>
+  <% if flash[:error].present? %>
+    <p>
+      <%= flash[:error] %>
+    </p>
+  <% end %>
+  <p>
+    <%= form.label :first_name %><br>
+    <%= form.text_field :first_name  %>
+  </p>
+  <p>
+    <%= form.label :last_name %><br>
+    <%= form.text_field :last_name  %>
+  </p>
+  <p>
+    <%= form.label :email %><br>
+    <%= form.text_field :email  %>
+  </p>
+  <p>
+    <%= form.label :title %><br>
+    <%= form.text_field :title  %>
+  </p>
+  <p>
+    <%= form.label :start_date %><br>
+    <%= form.text_field :start_date, :placeholder => 'dd/mm/yyyy', class: "datepicker" %>
+  </p>
+   <p>
+    <%= form.label :end_date %><br>
+    <%= form.text_field :end_date, :placeholder => 'dd/mm/yyyy', class: "datepicker" %>
+  </p>
+  <p>
+    <%= form.label :description %><br>
+    <%= form.text_area :description  %>
+  </p>
+   <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+  <script>
+   $('.datepicker').datepicker({ dateFormat: 'dd-mm-yy' });
+  </script>

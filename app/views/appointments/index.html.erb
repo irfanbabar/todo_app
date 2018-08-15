@@ -1,0 +1,29 @@
+<h2>Appointments</h2>
+<%= button_to "Create Appointment", appointments_new_path , :method => "get" %>
+<table>
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Emil</th>
+    <th>Title</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Description</th>
+
+   <%  @appointments.each  do |app| %>
+    <tr>  
+      <td> <%= app.first_name %> </td>
+      <td> <%= app.last_name %> </td>
+      <td> <%= app.email %> </td>
+      <td> <%= app.title %> </td>
+      <td> <%= app.start_date.strftime('%d/%m/%Y') rescue nil%> </td>
+      <td> <%= app.end_date.strftime('%d/%m/%Y') rescue nil%> </td>
+      <td> <%= app.description%> </td>
+      <td> <%= link_to 'remove', "/appointments/#{app.id}", method: :delete %> </td>
+    </tr> 
+<% end %>
+
+  </tr>
+</table>
+
+
