@@ -2,9 +2,11 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  get '/welcome', to: 'home#welcome'
+
   get 'home/index'
   get '/home/new',  to:     'home#new'
-  post '/appointments/token', to: 'appointments#generate_token' 
+  get '/appointments/token', to: 'appointments#generate_token' 
   get '/appointments', to: 'appointments#index'
   post '/appointments', to: 'appointments#create'
   get  '/appointments/new', to: 'appointments#new'

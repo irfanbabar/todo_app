@@ -13,12 +13,12 @@ class AppointmentsController < ApplicationController
   def new
     @appointment = Appointment.new
     if current_user.admin?
-    # elsif current_user.customer? and current_user.token != params[:token]
+    elsif current_user.customer? and current_user.token != params[:token]
       redirect_to '/appointments', flash: {error: 'Dont have permission'}
     else
-      @appointment.email = current_user.email
-      @appointment.first_name = current_user.first_name
-      @appointment.last_name = current_user.last_name
+      # @appointment.email = current_user.email
+      # @appointment.first_name = current_user.first_name
+      # @appointment.last_name = current_user.last_name
     end
   end
 
@@ -35,27 +35,31 @@ class AppointmentsController < ApplicationController
     else
       flash[:error] = ""
       render 'new' 
-    end 
+    end
   end
 
   def destroy
-    appointment = Appointment.find params[:id] 
+    appointment = Appointment.find params[:id]
     appointment.destroy
-    redirect_to '/appointments' 
-
+    redirect_to '/appointments'
   end
 
   def generate_token
-    user = User.find_by(email: params[:email])
-    if user.present?
-      user.token = SecureRandom.hex(10) 
-      if user.save
-        ApplicationMailer.send_token(user.email, user.token).deliver_now
-        redirect_to '/', flash: {success: 'Mail successfully sent'}
-      end
-    else
-      redirect_to '/', flash: {error: 'Error'}
-    end
+    t =  Token.new
+    t.generate_token
+    t.save
+    redirect_to root_path(token: t.token)
+
+    # user = User.find_by(email: params[:email])
+    # if user.present?
+    #   user.token = SecureRandom.hex(10) 
+    #   if user.save
+    #     ApplicationMailer.send_token(user.email, user.token).deliver_now
+    #     redirect_to '/', flash: {success: 'Mail successfully sent'}
+    #   end
+    # else
+    #   redirect_to '/', flash: {error: 'Error'}
+    # end
   end
 
   private

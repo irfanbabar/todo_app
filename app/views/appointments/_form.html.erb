@@ -1,37 +1,42 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="col-lg-6" >
 <%= form_with scope: :appointment, url: '/appointments',  local: true do |form| %>
-  <p>
+  <div  class="form-group mb-3">
     <%= form.label :first_name %><br>
-
-    <%= form.text_field :first_name, :required => true  %>
-  </p>
-  <p>
+    <%= form.text_field :first_name, class: 'form-control', placeholder: ' First Name', :required => true  %>
+  </div>
+  <div class="form-group mb-3">
     <%= form.label :last_name %><br>
-    <%= form.text_field :last_name, :required => true  %>
-  </p>
-  <p>
+    <%= form.text_field :last_name, class: 'form-control', placeholder: 'Last Name',  :required => true  %>
+  </div>
+  <div class="form-group mb-3">
     <%= form.label :email %><br>
-    <%= form.text_field :email, :required => true  %>
-  </p>
-  <p>
+    <%= form.text_field :email, class: 'form-control', placeholder: 'Email', :required => true  %>
+  </div>
+  <div class="form-group mb-">
     <%= form.label :title %><br>
-    <%= form.text_field :title, :required => true    %>
-  </p>
-  <p>
+    <%= form.text_field :title, class: 'form-control', placeholder: 'Title',  :required => true    %>
+  </div>
+  <div class="form-group" >
     <%= form.label :start_date %><br>
-    <%= form.text_field :start_date, :required => true,  :placeholder => 'dd/mm/yyyy', class: "datepicker" %>
-  </p>
-   <p>
+    <%= form.text_field :start_date, class: 'form-control date', id: 'birthdatepicker', required: true, :placeholder => 'dd/mm/yyyy' %>
+  </div>
+   <div class="form-group mb-3">
     <%= form.label :end_date %><br>
-    <%= form.text_field :end_date, :required => true, :placeholder => 'dd/mm/yyyy', class: "datepicker" %>
-  </p>
-  <p>
+    <%= form.text_field :end_date, class: 'form-control date',  id: 'birthdatepicker', required: true, :placeholder => 'dd/mm/yyyy' %>
+  </div>
+  <div class="form-group mb-3">
     <%= form.label :description %><br>
-    <%= form.text_area :description, :required => true  %>
-  </p>
+    <%= form.text_area :description, class: 'form-control', :required => true  %>
+  </div>
    <p>
-    <%= form.submit %>
+    <%= form.submit class: 'btn btn-primary' %>
   </p>
 <% end %>
+</div>
+</div>
+</div>
   <script>
    $('.datepicker').datepicker({ dateFormat: 'dd-mm-yy' });
   </script>

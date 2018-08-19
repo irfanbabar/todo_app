@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  # before_create :generate_token
   # before_create :set_access_toke
   # before_create :set_access_token
   # before_action :authenticate_user!
@@ -8,13 +9,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
          
    has_many :appointments
-    # validates FILL_IN, presence: true    # Replace FILL_IN with the right code.
-    # validates FILL_IN, presence: true
+    
+    enum role: [:customer , :admin]
 
-   # validates, presence: true
-
-   enum role: [:customer , :admin]
-
+  #  def generate_token
+  #   self.token = SecureRandom.urlsafe_base64
+  #   generate_token if User.exists?(token: self.token)
+  # end
   #   private
 
   # def set_access_token

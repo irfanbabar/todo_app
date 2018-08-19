@@ -1,8 +1,12 @@
 class HomeController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   def index
     # render plain: current_user.inspect
     # User.new params
+  end
+
+  def welcome
+    render layout: false
   end
 
   # def generate_token

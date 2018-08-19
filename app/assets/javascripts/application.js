@@ -18,5 +18,10 @@
 //= require toastr_rails
 //= require moment
 //= require fullcalendar
-//= require_tree .
 //= require_self
+//= require ./frontendjs/vendor.min.js
+//= require ./frontendjs/app.min.js
+//= require ./frontendjs/vendor/switchery.min.js
+//= require ./frontendjs/vendor/bootstrap-maxlength.min.js
+//= require ./frontendjs/pages/form-advanced.init.js
+//= require ./frontendjs/fullcalendar.min.js
