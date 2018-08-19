@@ -1,5 +1,6 @@
 class AppointmentsController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
+  before_action :validate_token, only: [:new]
   def index
     @appointments = Appointment.all
     respond_to do |format|
@@ -12,14 +13,14 @@ class AppointmentsController < ApplicationController
 
   def new
     @appointment = Appointment.new
-    if current_user.admin?
-    elsif current_user.customer? and current_user.token != params[:token]
-      redirect_to '/appointments', flash: {error: 'Dont have permission'}
-    else
-      # @appointment.email = current_user.email
-      # @appointment.first_name = current_user.first_name
-      # @appointment.last_name = current_user.last_name
-    end
+    # if current_user.admin?
+    # elsif current_user.customer? and current_user.token != params[:token]
+    #   redirect_to '/appointments', flash: {error: 'Dont have permission'}
+    # else
+    #   # @appointment.email = current_user.email
+    #   # @appointment.first_name = current_user.first_name
+    #   # @appointment.last_name = current_user.last_name
+    # end
   end
 
   def method_name
@@ -71,6 +72,14 @@ class AppointmentsController < ApplicationController
     appointments.map do |appointment|
       {id: appointment.id, title: appointment.title, 
         start: appointment.start_date, end: appointment.end_date}
+    end
+  end
+
+  def validate_token
+    token = Token.find_by(token: params[:token])
+    if params[:token].blank? or (params[:token].present? and token.blank?)
+      render plain: "You dont have permission"
+      return false
     end
   end
 end
