@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   post '/appointments', to: 'appointments#create'
   get  '/appointments/new', to: 'appointments#new'
   delete '/appointments/:id', to: 'appointments#destroy'
-   
+  get '/appointments/:id/change_status', to: 'appointments#change_status'   
   # default_url_options host: 'localhost:3000'
   # mount LetterOpenerWeb::Engine, at: "/letter_opener"
 

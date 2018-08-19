@@ -23,8 +23,11 @@ class AppointmentsController < ApplicationController
     # end
   end
 
-  def method_name
-    
+  def change_status
+    app = Appointment.find_by(id: params[:id])
+    app.approved = params[:approved]
+    app.save
+    redirect_to '/appointments'
   end
 
   def create
@@ -76,10 +79,12 @@ class AppointmentsController < ApplicationController
   end
 
   def validate_token
-    token = Token.find_by(token: params[:token])
-    if params[:token].blank? or (params[:token].present? and token.blank?)
-      render plain: "You dont have permission"
-      return false
+    if current_user.blank?
+      token = Token.find_by(token: params[:token])
+      if params[:token].blank? or (params[:token].present? and token.blank?)
+        render plain: "You dont have permission"
+        return false
+      end
     end
   end
 end
